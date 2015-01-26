@@ -5,6 +5,16 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
            version="2.5">
 
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>wherethepartyat.AuthFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <servlet-name>GetPartyInfo</servlet-name>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>GetPartyInfo</servlet-name>
         <servlet-class>wherethepartyat.PartyInfoServlet</servlet-class>
@@ -14,9 +24,18 @@
         </init-param>
     </servlet>
 
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>wherethepartyat.LoginServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>GetPartyInfo</servlet-name>
         <url-pattern>/getInfo</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
 </web-app>
