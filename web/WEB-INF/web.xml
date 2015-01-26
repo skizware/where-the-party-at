@@ -8,6 +8,10 @@
     <servlet>
         <servlet-name>GetPartyInfo</servlet-name>
         <servlet-class>wherethepartyat.PartyInfoServlet</servlet-class>
+        <init-param>
+            <param-name>venueName</param-name>
+            <param-value>Entelect HQ - Init Param</param-value>
+        </init-param>
     </servlet>
 
     <servlet-mapping>
