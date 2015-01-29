@@ -17,11 +17,15 @@ public class AuthFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         System.out.println("AUTH FILTER!");
-        if( ((HttpServletRequest)servletRequest).getSession().getAttribute("isLoggedIn") == null || !(Boolean)((HttpServletRequest)servletRequest).getSession().getAttribute("isLoggedIn") ){
+        if(isLoggedOut((HttpServletRequest) servletRequest)){
             System.out.println("NOT LOGGED IN!");
             ((HttpServletResponse)servletResponse).sendRedirect("/where-the-party-at/login");
         }
         filterChain.doFilter(servletRequest, servletResponse);
+    }
+
+    private boolean isLoggedOut(HttpServletRequest servletRequest) {
+        return (servletRequest).getSession().getAttribute("isLoggedIn") == null || !(Boolean)(servletRequest).getSession().getAttribute("isLoggedIn");
     }
 
     @Override

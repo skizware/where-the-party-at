@@ -19,6 +19,10 @@ public class LoginServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         boolean errorLogin = "true".equals(req.getParameter("error"));
         ServletOutputStream out = resp.getOutputStream();
+        constructLoginPage(errorLogin, out);
+    }
+
+    private void constructLoginPage(boolean errorLogin, ServletOutputStream out) throws IOException {
         out.println("<!DOCTYPE html>");
         out.println("<html>");
         out.println("<head>");
@@ -41,16 +45,20 @@ public class LoginServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        String redirectPath = "/where-the-party-at/login?error=true";
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        String redirectPath = "/where-the-party-at/login?error=true";
 
-        if("dave".equals(username) && "password".equals(password)){
+        if(passwordMatch(username, password)){
             req.getSession().setAttribute("isLoggedIn", true);
             redirectPath = "/where-the-party-at/getInfo";
         }
 
         resp.sendRedirect(redirectPath);
+    }
+
+    private boolean passwordMatch(String username, String password) {
+        return "dave".equals(username) && "password".equals(password);
     }
 
 }
